@@ -1,0 +1,60 @@
+.legends{
+    display: inline-block;
+    width: 18;
+    height: 18;
+    border-radius: 50%;
+    background: orange;
+    margin-right: 8;
+    opacity: 0.7;
+}
+.server-info-container{
+    position: absolute;
+    /* height: 103px; */
+    top: 20; 
+    left: 10;
+    padding: 10px; 
+    background: rgb(34, 34, 34);
+    color: 'white';
+    z-index: 2;
+}
+.parent-history-container{    
+    position: absolute;
+    top: 180;
+    left: 10;      
+    background: #222; 
+    color: #fff;
+    font-size: small;
+    padding: 12;
+    border-radius: 8; 
+    z-index: 2;
+    width: 320;  
+}
+.container-legend {
+    position: absolute;
+    bottom: 20;
+    left: 20;
+    background: rgba(30,30,30,0.95);
+    color: #fff;
+    padding: 14px 18px;
+    border-radius: 10;
+    font-size: 15;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.parent-leg{
+    display: 'flex';
+    align-items: 'center';
+    margin-bottom: 6
+}
+
+.cloud-details-container{
+    position: absolute;
+    top: 120; 
+    left: 10;
+    background: '#222'; 
+    color: '#fff';
+    padding: 8; 
+    border-radius: 8;
+    z-index: 2;
+}
