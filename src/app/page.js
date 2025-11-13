@@ -6,11 +6,9 @@ const WorldMap = dynamic(() => import('../components/WorldMap'), { ssr: false })
 // const WorldMapNew = dynamic(() => import('../components/WorldMapNew'), { ssr: false });
 
 export default function Home() {
-  console.log("TEST")
   return (
     <main style={{ width: '100vw', height: '100vh', background: '#000' }}>
       <WorldMap />
-      {/* <WorldMapNew /> */}
       
     </main>
   );
