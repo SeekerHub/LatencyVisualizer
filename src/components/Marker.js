@@ -2,7 +2,7 @@
 import latLonToVector3 from "@/app/helpers/latLonToVector3";
 import { useState, useRef, memo } from "react";
 
-const Marker = memo(({ data, onHover, latency }) => {
+const Marker = memo(({ data, onHover }) => {
   const meshRef = useRef();
   const [hovered, setHovered] = useState(false);
   const colorMap = { AWS: 'orange', GCP: 'green', Azure: 'blue' };

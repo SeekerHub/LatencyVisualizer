@@ -8,7 +8,6 @@ const CloudRegionMarker = memo(({ region, visible, onHover }) => {
   const position = latLonToVector3(region.lat, region.lon, 2.05);
   return (
     <group position={position}>
-      {/* Main region marker */}
       <mesh
         onPointerOver={() => onHover(region)}
         onPointerOut={() => onHover(null)}
@@ -16,7 +15,6 @@ const CloudRegionMarker = memo(({ region, visible, onHover }) => {
         <sphereGeometry args={[0.13, 24, 24]} />
         <meshStandardMaterial color={colorMap[region.provider]} opacity={0.7} transparent />
       </mesh>
-      {/* Region boundary/cluster */}
       <mesh>
         <sphereGeometry args={[0.22, 24, 24]} />
         <meshBasicMaterial color={colorMap[region.provider]} opacity={0.18} transparent />

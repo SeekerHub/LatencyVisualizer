@@ -3,12 +3,9 @@ import React, {useCallback,useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stars } from '@react-three/drei';
 import * as THREE from 'three';
-import { useLatency } from '@/app/hooks/useLatency';
 import { exchangeServers, cloudRegions } from '../../public/data/data';
-import LatencyLine from './LatencyLine';
 import Marker from './Marker';
 import MapLegend from './MapLegend';
-import latLonToVector3 from '@/app/helpers/latLonToVector3';
 import CloudRegionMarker from './CloudRegionMarker';
 import ServerInfoPanel from './ServerInfoPanel';
 import CloudProviderFilter from './CloudProviderFilter';
@@ -18,19 +15,10 @@ import Earth from './Earth';
 
 
 
-
-
-
-
 export default function WorldMap() {
   const [hoveredServer, setHoveredServer] = useState(null);
   const [hoveredRegion, setHoveredRegion] = useState(null);
   const [visibleProviders, setVisibleProviders] = useState({ AWS: true, GCP: true, Azure: true });
-
- 
-  const { latencyMap, loading, error } = useLatency(exchangeServers, 10000);
-
-
 
   const handleProviderChange = useCallback(
     (p, checked) => setVisibleProviders(v => ({ ...v, [p]: checked })),
@@ -45,8 +33,6 @@ export default function WorldMap() {
         <ServerInfoPanel
           hoveredServer={hoveredServer}
           hoveredRegion={hoveredRegion}
-          loading={loading}
-          error={error}
         />
 
         <CloudProviderFilter
@@ -54,7 +40,6 @@ export default function WorldMap() {
           handleProviderChange={handleProviderChange}
         />
         
-        {/* Add the legend */}
 
         <LatencyDashboard />
         <MapLegend />
@@ -69,13 +54,11 @@ export default function WorldMap() {
         <directionalLight position={[-5, -2, -5]} intensity={0.5} color="blue" />
         <pointLight position={[-5, -3, -5]} intensity={0.8} />
 
-        {/* Background */}
+       
         <Stars radius={150} depth={60} count={5000} factor={5} fade />
 
-        {/* Earth */}
         <Earth />
 
-        {/* Subtle atmosphere glow */}
         <mesh>
           <sphereGeometry args={[2.05, 64, 64]} />
           <meshStandardMaterial
@@ -85,9 +68,8 @@ export default function WorldMap() {
           />
         </mesh>
 
-        {/* Exchange Server Markers */}
         {exchangeServers.map(e => (
-          <Marker key={e.name} data={e} onHover={setHoveredServer} latency={latencyMap[e.name]}  />
+          <Marker key={e.name} data={e} onHover={setHoveredServer}   />
         ))}
 
         {/* Cloud Region Markers */}
@@ -100,12 +82,7 @@ export default function WorldMap() {
           />
         ))}
 
-        {/* Latency lines */}
-        {exchangeServers.map(e => {
-          const start = latLonToVector3(e.lat, e.lon);
-          const end = new THREE.Vector3(0, 0, 0); // Example: connect to origin
-          return <LatencyLine key={e.name} start={start} end={end} latency={latencyMap[e.name] || 0} />;
-        })}
+        
         <OrbitControls enableZoom enableRotate />
       </Canvas>
       </div>
